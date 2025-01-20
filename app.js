@@ -110,7 +110,6 @@ async function fetchStarships() {
 
 fetchStarships();
 
-
 function processStarshipsData(data) {
   for (const starship of data) {
     const imgShipContainer = document.createElement("div");
@@ -155,14 +154,128 @@ function processStarshipsData(data) {
   }
 }
 
+// Función para mostrar el modal con la información
 function mostrarInfo(e) {
-  alert(e);
-  const modalExistente = document.querySelector('.modal');
+  const modalExistente = document.querySelector(".modal");
   if (modalExistente) {
     modalExistente.remove();
   }
   const modal = document.createElement("div");
   modal.setAttribute("class", "modal");
-  modal.textContent = starshipsData[e].name;
+  modal.setAttribute("id", "modal");
+  const modalId = document.getElementById("modal");
+
+  const modalDivInfo = document.createElement("div");
+
+  const imgShip = document.createElement("img");
+  imgShip.setAttribute("class", "imgModal");
+  imgShip.setAttribute("src", `${ships[e].url}`);
+
+  const titleModal = document.createElement("h1");
+  titleModal.setAttribute("class", "titleModal")
+  titleModal.textContent = starshipsData[e].name;
+
+  const infoModal = document.createElement("div");
+  infoModal.setAttribute("class", "modalInfo");
+
+  const nameModel = document.createElement("p");
+  nameModel.textContent = `Modelo: ${starshipsData[e].model}`;
+
+  const manufactModel = document.createElement("p");
+  manufactModel.textContent = `Manufacturera: ${starshipsData[e].manufacturer}`;
+
+  const passengersModel = document.createElement("p");
+  passengersModel.textContent = `Capacidad máxima de pasajeros: ${starshipsData[e].passengers}`;
+
+  const starshipClass = document.createElement("p");
+  starshipClass.textContent = `Clase de nave: ${starshipsData[e].starship_class}`;
+
+  const credits = document.createElement("p")
+  credits.textContent = `Costo en créditos: ${starshipsData[e].cost_in_credits}`
+
+  // Guardar información en localStorage
+  const starshipInfo = {
+    name: starshipsData[e].name,
+    model: starshipsData[e].model,
+    manufacturer: starshipsData[e].manufacturer,
+    passengers: starshipsData[e].passengers,
+    starship_class: starshipsData[e].starship_class,
+    cost_in_credits: starshipsData[e].cost_in_credits,
+    url: ships[e].url
+  };
+  localStorage.setItem('starshipInfo', JSON.stringify(starshipInfo));
+
+  // ! Elemento padre
   mainShip.prepend(modal);
+
+  // ! Elementos hijos
+  modal.append(modalDivInfo);
+  modal.prepend(imgShip);
+  modalDivInfo.append(titleModal);
+  modalDivInfo.append(infoModal);
+  modalDivInfo.append(nameModel);
+  modalDivInfo.append(manufactModel);
+  modalDivInfo.append(credits);
+  modalDivInfo.append(passengersModel);
+  modalDivInfo.append(starshipClass);
 }
+
+// Función para cargar la información del modal desde localStorage
+function cargarInfo() {
+  const starshipInfo = JSON.parse(localStorage.getItem('starshipInfo'));
+  if (starshipInfo) {
+    const modalExistente = document.querySelector(".modal");
+    if (modalExistente) {
+      modalExistente.remove();
+    }
+    const modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modal");
+    const modalId = document.getElementById("modal");
+
+    const modalDivInfo = document.createElement("div");
+
+    const imgShip = document.createElement("img");
+    imgShip.setAttribute("class", "imgModal");
+    imgShip.setAttribute("src", starshipInfo.url);
+
+    const titleModal = document.createElement("h1");
+    titleModal.setAttribute("class", "titleModal")
+    titleModal.textContent = starshipInfo.name;
+
+    const infoModal = document.createElement("div");
+    infoModal.setAttribute("class", "modalInfo");
+
+    const nameModel = document.createElement("p");
+    nameModel.textContent = `Modelo: ${starshipInfo.model}`;
+
+    const manufactModel = document.createElement("p");
+    manufactModel.textContent = `Manufacturera: ${starshipInfo.manufacturer}`;
+
+    const passengersModel = document.createElement("p");
+    passengersModel.textContent = `Capacidad máxima de pasajeros: ${starshipInfo.passengers}`;
+
+    const starshipClass = document.createElement("p");
+    starshipClass.textContent = `Clase de nave: ${starshipInfo.starship_class}`;
+
+    const credits = document.createElement("p")
+    credits.textContent = `Costo en créditos: ${starshipInfo.cost_in_credits}`
+
+    // ! Elemento padre
+    mainShip.prepend(modal);
+
+    // ! Elementos hijos
+    modal.append(modalDivInfo);
+    modal.prepend(imgShip);
+    modalDivInfo.append(titleModal);
+    modalDivInfo.append(infoModal);
+    modalDivInfo.append(nameModel);
+    modalDivInfo.append(manufactModel);
+    modalDivInfo.append(credits);
+    modalDivInfo.append(passengersModel);
+    modalDivInfo.append(starshipClass);
+  }
+}
+
+// Llamar a cargarInfo cuando se carga la página
+window.onload = cargarInfo;
