@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --principal-font: "Poppins";
+}
+
+* {
+  font-family: var(--principal-font);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 50dvw;
+  margin: 0 auto;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 2.5rem;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+h1 {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+h2 {
+  height: 15%;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.containerImg {
+  height: 50%;
+  width: 100%;
+  background-size: contain;
+}
+
+.reduce_info {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal {
+  height: 30dvh;
+  width: 50dvw;
+  margin: 2rem auto;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 2%;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #ffff;
+  background: #000;
+  align-self: flex-end;
+}
