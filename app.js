@@ -154,7 +154,6 @@ function processStarshipsData(data) {
   }
 }
 
-// Función para mostrar el modal con la información
 function mostrarInfo(e) {
   const modalExistente = document.querySelector(".modal");
   if (modalExistente) {
@@ -220,7 +219,6 @@ function mostrarInfo(e) {
   modalDivInfo.append(starshipClass);
 }
 
-// Función para cargar la información del modal desde localStorage
 function cargarInfo() {
   const starshipInfo = JSON.parse(localStorage.getItem('starshipInfo'));
   if (starshipInfo) {
@@ -277,5 +275,4 @@ function cargarInfo() {
   }
 }
 
-// Llamar a cargarInfo cuando se carga la página
 window.onload = cargarInfo;
